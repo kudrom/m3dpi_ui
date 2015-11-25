@@ -1,8 +1,6 @@
 DigitalClock = function(layout){
     this.clock_accessor = get_accessors(layout.accessors)[0];
 
-    layout.scale = 1;
-
     // Cook the layout for the DigitalDisplay widget
     var event_name = layout.event_names[0];
     layout.accessors = [{'type': 'index', 'start': 0, 'end': 6, 'event': event_name}];
@@ -24,8 +22,8 @@ DigitalClock = function(layout){
             var seconds = date_obj.getSeconds();
 
             var data_display = [hours / 10 | 0, hours % 10,
-                                            minutes / 10 | 0, minutes % 10,
-                                            seconds / 10 | 0, seconds % 10];
+                                minutes / 10 | 0, minutes % 10,
+                                seconds / 10 | 0, seconds % 10];
             var event_source = Object.keys(jdata)[0];
 
             var jdata_display = {};
