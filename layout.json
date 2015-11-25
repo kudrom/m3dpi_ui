@@ -1,6 +1,6 @@
 {
     "date": {
-        "type": "date_line",
+        "type": "digital_clock",
         "size": {
             "width": 760,
             "height": 500
