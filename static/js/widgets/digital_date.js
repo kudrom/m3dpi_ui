@@ -5,7 +5,7 @@ DigitalDate = function(layout){
     var event_name = layout.event_names[0];
     layout.accessors = [{'type': 'index', 'start': 0, 'end': 8, 'event': event_name}];
     layout.digits = [2, 2, 4];
-    layout.separator = true;
+    layout.separator = false;
     DigitalDisplay.call(this, layout);
 
     this.old_paint = this.paint;

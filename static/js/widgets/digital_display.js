@@ -28,8 +28,8 @@ DigitalDisplay = function(layout){
 <path d="M10,88L14,84L42,84L46,88L42,92L14,92L10,88z"/>`;
 
     var separator_circles = `
-<circle r="4" cx="112" cy="28"/>
-<circle r="4" cx="103.5" cy="68"/>`;
+<circle r="4" cx="0" cy="28"/>
+<circle r="4" cx="0" cy="68"/>`;
 
     var gap = 12 * layout.scale;
     var html_text = '<g transform="translate(' + gap + ') ' +
@@ -39,11 +39,11 @@ DigitalDisplay = function(layout){
     var previous_digits = 0;
     var total_groups = layout.digits.length;
     for(var i = 0; i < total_groups; i++){
-        var translation_amount = number_size*previous_digits + separators_amount;
+        var translation_amount = (number_size*previous_digits) + separators_amount;
         html_text += '<g transform=translate(' + translation_amount + ')>';
         for(var ii = 0; ii < layout.digits[i]; ii++){
             var n = ii * number_size;
-            html_text += '<g class="digit" transform="skewX(-12) ' +
+            html_text += '<g class="digit" transform="skewX(0) ' +
                                                      'translate(' + n + ')">';
             html_text += digit_paths;
             html_text += '</g>';
@@ -51,12 +51,14 @@ DigitalDisplay = function(layout){
         html_text += '</g>';
         previous_digits += ii;
 
-        if(layout.separator && ((i + 1) < total_groups)){
+        if((i + 1) < total_groups){
             separators_amount += 20;
-            var tr = translation_amount - 5;
-            html_text += '<g class="separator" transform=translate(' + tr + ')>';
-            html_text += separator_circles;
-            html_text += '</g>'
+            if(layout.separator){
+                var tr = (number_size*previous_digits) + separators_amount - 8;
+                html_text += '<g class="separator" transform=translate(' + tr + ')>';
+                html_text += separator_circles;
+                html_text += '</g>'
+            }
         }
     }
     html_text += '</g>'

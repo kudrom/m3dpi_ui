@@ -16,7 +16,7 @@
         "parent": "global",
         "type": "digital_clock",
         "size": {
-            "width": 350,
+            "width": 370,
             "height": 100
         },
         "anchor": "#time-anchor"
