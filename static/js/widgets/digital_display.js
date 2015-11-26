@@ -1,10 +1,14 @@
 DigitalDisplay = function(layout){
+    // Requirements for the layout
     validate_requirements(['scale', 'digits', 'separator'], layout);
 
+    // Inherit from Widget
     Widget.call(this, layout);
 
+    // Get the accessors from the layout definition
     this.accessors = get_accessors(layout.accessors);
 
+    // Seven segments for the display
     var digit_paths = `
 <path d="M10,8L14,4L42,4L46,8L42,12L14,12L10,8z"/>
 <path d="M8,10L12,14L12,42L8,46L4,42L4,14L8,10z"/>
@@ -14,34 +18,37 @@ DigitalDisplay = function(layout){
 <path d="M48,50L52,54L52,82L48,86L44,82L44,54L48,50z"/>
 <path d="M10,88L14,84L42,84L46,88L42,92L14,92L10,88z"/>`;
 
+    // Circles for the separator
     var separator_circles = `
 <circle r="4" cx="0" cy="28"/>
 <circle r="4" cx="0" cy="68"/>`;
 
-    var gap = 12 * layout.scale;
-    var html_text = '<g transform="translate(' + gap + ') ' +
-                                  'scale(' + layout.scale + ')">';
-    var number_size = 50;
+    var digit_size = 50;
     var separators_amount = 0;
     var previous_digits = 0;
     var total_groups = layout.digits.length;
+    var html_text = '<g transform="scale(' + layout.scale + ')">';
     for(var i = 0; i < total_groups; i++){
-        var translation_amount = (number_size*previous_digits) + separators_amount;
+        var translation_amount = (digit_size*previous_digits) + separators_amount;
+
+        // Wrapper around each group of digits
         html_text += '<g transform=translate(' + translation_amount + ')>';
         for(var ii = 0; ii < layout.digits[i]; ii++){
-            var n = ii * number_size;
+            var n = ii * digit_size;
             html_text += '<g class="digit" transform="skewX(0) ' +
                                                      'translate(' + n + ')">';
             html_text += digit_paths;
             html_text += '</g>';
         }
         html_text += '</g>';
+
         previous_digits += ii;
 
+        // Print separators
         if((i + 1) < total_groups){
             separators_amount += 20;
             if(layout.separator){
-                var tr = (number_size*previous_digits) + separators_amount - 8;
+                var tr = (digit_size*previous_digits) + separators_amount - 8;
                 html_text += '<g class="separator" transform=translate(' + tr + ')>';
                 html_text += separator_circles;
                 html_text += '</g>'
@@ -54,6 +61,9 @@ DigitalDisplay = function(layout){
 
     this.digit = this.svg.selectAll(".digit");
     this.separators = this.svg.selectAll(".separator circle");
+
+    // Each list is a segment of the display, and each element in the list is
+    // to set the lit class for each number from 0 to 9
     this.digitPattern = [
       [1,0,1,1,0,1,1,1,1,1],
       [1,0,0,0,1,1,1,0,1,1],
@@ -64,16 +74,20 @@ DigitalDisplay = function(layout){
       [1,0,1,1,0,1,1,0,1,1]
     ];
     
+    // Callback from the framework
     this.paint = function(jdata){
         if(jdata !== null){
+            // For the anonymous functions to be able to access it
             var digitPattern = this.digitPattern;
 
             var data = [];
             for(var i = 0; i < this.accessors.length; i++){
                 data.push(this.accessors[i](jdata));
             }
-
             this.digit = this.digit.data(data);
+
+            // Select in order each segment of every digit and lit it if the
+            // number of the digit demands it
             this.digit.select("path:nth-child(1)")
                      .classed("lit", function(d) { return digitPattern[0][d]; });
             this.digit.select("path:nth-child(2)")
@@ -89,14 +103,18 @@ DigitalDisplay = function(layout){
             this.digit.select("path:nth-child(7)")
                      .classed("lit", function(d) { return digitPattern[6][d]; });
 
+            // The separators are always turned on
             this.separators.classed("lit", 1);
         }
     };
 
+    // Callback from the framework that should leave the widget in a stable
+    // state
     this.clear_framebuffers = function(){
         this.digit.selectAll("path").classed("lit", 0);
         this.separators.classed("lit", 0);
     };
 };
 
+// Registration of the widget
 lupulo_controller.register_widget("digital_display", DigitalDisplay);
