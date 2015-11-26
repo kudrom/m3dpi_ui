@@ -12,14 +12,26 @@
         "scale": 1
     },
 
-    "time": {
+    "device_time": {
         "parent": "global",
         "type": "digital_clock",
         "size": {
             "width": 370,
             "height": 100
         },
-        "anchor": "#time-anchor"
+        "device_time": true,
+        "anchor": "#device-time-anchor"
+    },
+
+    "real_time": {
+        "parent": "global",
+        "type": "digital_clock",
+        "size": {
+            "width": 370,
+            "height": 100
+        },
+        "device_time": false,
+        "anchor": "#real-time-anchor"
     },
 
     "date": {

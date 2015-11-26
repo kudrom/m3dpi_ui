@@ -1,18 +1,5 @@
 DigitalDisplay = function(layout){
-    (function(requirements){
-        var broken = false;
-        for(var i = 0; i < requirements.length; i++){
-            if(!(requirements[i] in layout)){
-                var req = "<strong>" + requirements[i] + "</strong>";
-                var name = "<strong>" + layout.name + "</strong>";
-                add_alert("danger", req + " not in layout " + name);
-                broken = true;
-            }
-        }
-        if(broken){
-            throw "Broken preconditions for " + layout.name;
-        }
-    })(['scale', 'digits', 'separator']);
+    validate_requirements(['scale', 'digits', 'separator'], layout);
 
     Widget.call(this, layout);
 

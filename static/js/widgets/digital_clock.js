@@ -1,4 +1,6 @@
 DigitalClock = function(layout){
+    validate_requirements(['device_time'], layout);
+
     this.clock_accessor = get_accessors(layout.accessors)[0];
 
     // Cook the layout for the DigitalDisplay widget
@@ -12,6 +14,12 @@ DigitalClock = function(layout){
     this.old_clear = this.clear_framebuffers;
 
     this.paint = function(jdata){
+        if(!layout.device_time){
+            var event_source = get_complete_event_name(event_name);
+            var jdata = {};
+            jdata[event_source] = (new Date().getTime()) / 1000;
+        }
+
         if(jdata !== null){
             var date = this.clock_accessor(jdata);
 
