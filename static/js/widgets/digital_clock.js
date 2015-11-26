@@ -4,8 +4,7 @@ DigitalClock = function(layout){
     // Cook the layout for the DigitalDisplay widget
     var event_name = layout.event_names[0];
     layout.accessors = [{'type': 'index', 'start': 0, 'end': 6, 'event': event_name}];
-    layout.group_size = 2;
-    layout.total = 6;
+    layout.digits = [2, 2, 2];
     layout.separator = true;
     DigitalDisplay.call(this, layout);
 

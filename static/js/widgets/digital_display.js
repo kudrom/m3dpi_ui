@@ -12,7 +12,7 @@ DigitalDisplay = function(layout){
         if(broken){
             throw "Broken preconditions for " + layout.name;
         }
-    })(['scale', 'total', 'group_size', 'separator']);
+    })(['scale', 'digits', 'separator']);
 
     Widget.call(this, layout);
 
@@ -35,12 +35,13 @@ DigitalDisplay = function(layout){
     var html_text = '<g transform="translate(' + gap + ') ' +
                                   'scale(' + layout.scale + ')">';
     var number_size = 50;
-    var total_groups = Math.floor(layout.total / layout.group_size);
     var separators_amount = 0;
+    var previous_digits = 0;
+    var total_groups = layout.digits.length;
     for(var i = 0; i < total_groups; i++){
-        var translation_amount = i*number_size*layout.group_size + separators_amount;
+        var translation_amount = number_size*previous_digits + separators_amount;
         html_text += '<g transform=translate(' + translation_amount + ')>';
-        for(var ii = 0; ii < layout.group_size; ii++){
+        for(var ii = 0; ii < layout.digits[i]; ii++){
             var n = ii * number_size;
             html_text += '<g class="digit" transform="skewX(-12) ' +
                                                      'translate(' + n + ')">';
@@ -48,6 +49,7 @@ DigitalDisplay = function(layout){
             html_text += '</g>';
         }
         html_text += '</g>';
+        previous_digits += ii;
 
         if(layout.separator && ((i + 1) < total_groups)){
             separators_amount += 20;
