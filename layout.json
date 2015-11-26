@@ -1,19 +1,34 @@
 {
-    "date": {
-        "type": "digital_clock",
-        "size": {
-            "width": 350,
-            "height": 100
-        },
+    "global": {
+        "abstract": "true",
         "margin": {
             "top": 0,
             "bottom": 0,
             "left": 0,
             "right": 0
         },
-        "anchor": "#date-anchor",
         "event_names": ["date"],
         "accessors": [{"type": "primitive"}],
         "scale": 1
+    },
+
+    "time": {
+        "parent": "global",
+        "type": "digital_clock",
+        "size": {
+            "width": 350,
+            "height": 100
+        },
+        "anchor": "#time-anchor"
+    },
+
+    "date": {
+        "parent": "global",
+        "type": "digital_date",
+        "size": {
+            "width": 500,
+            "height": 100
+        },
+        "anchor": "#date-anchor"
     }
 }
