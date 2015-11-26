@@ -31,8 +31,10 @@ DigitalDisplay = function(layout){
 <circle r="4" cx="112" cy="28"/>
 <circle r="4" cx="103.5" cy="68"/>`;
 
-    var html_text = "<g transform=translate(12)>";
-    var number_size = 50 * layout.scale;
+    var gap = 12 * layout.scale;
+    var html_text = '<g transform="translate(' + gap + ') ' +
+                                  'scale(' + layout.scale + ')">';
+    var number_size = 50;
     var total_groups = Math.floor(layout.total / layout.group_size);
     var separators_amount = 0;
     for(var i = 0; i < total_groups; i++){

@@ -14,6 +14,6 @@
         "anchor": "#date-anchor",
         "event_names": ["date"],
         "accessors": [{"type": "primitive"}],
-        "scale": 1
+        "scale": 0.4
     }
 }
