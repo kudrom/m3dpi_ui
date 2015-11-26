@@ -28,10 +28,10 @@ DigitalDisplay = function(layout){
 <path d="M10,88L14,84L42,84L46,88L42,92L14,92L10,88z"/>`;
 
     var separator_circles = `
-<circle r="4" cx="112" cy="28" class="lit"/>
-<circle r="4" cx="103.5" cy="68" class="lit"/>`;
+<circle r="4" cx="112" cy="28"/>
+<circle r="4" cx="103.5" cy="68"/>`;
 
-    var html_text = "";
+    var html_text = "<g transform=translate(12)>";
     var number_size = 50 * layout.scale;
     var total_groups = Math.floor(layout.total / layout.group_size);
     var separators_amount = 0;
@@ -55,11 +55,12 @@ DigitalDisplay = function(layout){
             html_text += '</g>'
         }
     }
+    html_text += '</g>'
 
     this.svg.html(html_text);
-    this.svg.style("visibility", "hidden");
 
     this.digit = this.svg.selectAll(".digit");
+    this.separators = this.svg.selectAll(".separator circle");
     this.digitPattern = [
       [1,0,1,1,0,1,1,1,1,1],
       [1,0,0,0,1,1,1,0,1,1],
@@ -72,8 +73,6 @@ DigitalDisplay = function(layout){
     
     this.paint = function(jdata){
         if(jdata !== null){
-            this.svg.style("visibility", "visible");
-
             var digitPattern = this.digitPattern;
 
             var data = [];
@@ -96,11 +95,14 @@ DigitalDisplay = function(layout){
                      .classed("lit", function(d) { return digitPattern[5][d]; });
             this.digit.select("path:nth-child(7)")
                      .classed("lit", function(d) { return digitPattern[6][d]; });
+
+            this.separators.classed("lit", 1);
         }
     };
 
     this.clear_framebuffers = function(){
-        this.svg.style("visibility", "hidden");
+        this.digit.selectAll("path").classed("lit", 0);
+        this.separators.classed("lit", 0);
     };
 };
 
