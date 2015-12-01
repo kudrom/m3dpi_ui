@@ -1,5 +1,8 @@
 Battery = function(layout){
-    layout.viewBox = "0 90 570 570";
+    layout.viewBox = "0 90 570 400";
+    layout.size.height = layout.size.width * 0.7;
+    $(layout.anchor).append('<span id="battery_display"></span>');
+
     Widget.call(this, layout);
 
     this.accessor = get_accessors(layout.accessors)[0];
@@ -12,6 +15,17 @@ Battery = function(layout){
     this.svg.html(html_text);
 
     var N_SEGMENTS_BATTERY = 4;
+
+    var event_name = layout.event_names[0];
+    layout.accessors = [{'type': 'index', 'start': 0, 'end': 3, 'event': event_name}]
+    layout.anchor = '#battery_display';
+    layout.scale = 1;
+    layout.size = {'height': 100, 'width': 170};
+    layout.margin.top = 5;
+    layout.digits = [3];
+    layout.separator = false;
+    delete layout.viewBox;
+    this.display = new DigitalDisplay(layout);
 
     this.paint = function(jdata){
         if(jdata !== null){
@@ -35,12 +49,28 @@ Battery = function(layout){
                     });
 
             this.svg.selectAll('.bottle').classed('lit', true);
+
+            var data_display = [];
+            if(level == 100){
+                data_display [1, 0, 0];
+            }else{
+                data_display.push(0);
+                data_display.push(Math.floor(level / 10));
+                data_display.push(Math.floor(level % 10));
+            }
+
+            var event_source = Object.keys(jdata)[0];
+            var jdata_display = {};
+            jdata_display[event_source] = data_display;
+
+            this.display.paint(jdata_display);
         }
     };
 
     this.clear_framebuffers = function(){
         this.svg.selectAll('.bottle').classed('lit', false);
         this.svg.selectAll('.bar').remove();
+        this.display.clear_framebuffers()
     }
 }
 

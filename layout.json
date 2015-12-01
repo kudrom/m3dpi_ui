@@ -44,7 +44,7 @@
         "anchor": "#date-anchor"
     },
 
-    "battery": {
+    "battery-widget": {
         "parent": "global",
         "type": "battery",
         "size":{
