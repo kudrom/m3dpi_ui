@@ -16,7 +16,7 @@
         "parent": "global",
         "type": "digital_clock",
         "size": {
-            "width": 370,
+            "width": 380,
             "height": 100
         },
         "device_time": true,
@@ -48,8 +48,8 @@
         "parent": "global",
         "type": "battery",
         "size":{
-            "width": 130,
-            "height": 130
+            "width": 260,
+            "height": 0
         },
         "accessors": [{"type": "primitive"}],
         "event_names": ["battery"],

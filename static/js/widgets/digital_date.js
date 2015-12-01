@@ -1,4 +1,7 @@
 DigitalDate = function(layout){
+    // Clone the layout to avoid its pollution
+    var layout = jQuery.extend(true, {}, layout);
+
     // Get the accessor before overwriting it
     this.date_accessor = get_accessors(layout.accessors)[0];
 

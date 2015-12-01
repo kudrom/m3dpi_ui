@@ -1,4 +1,7 @@
 DigitalClock = function(layout){
+    // Clone the layout to avoid its pollution
+    var layout = jQuery.extend(true, {}, layout);
+
     // Check the requirements
     validate_requirements(['device_time'], layout);
 
