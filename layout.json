@@ -42,5 +42,17 @@
             "height": 100
         },
         "anchor": "#date-anchor"
+    },
+
+    "battery": {
+        "parent": "global",
+        "type": "battery",
+        "size":{
+            "width": 130,
+            "height": 130
+        },
+        "accessors": [{"type": "primitive"}],
+        "event_names": ["battery"],
+        "anchor": "#battery-widget-anchor"
     }
 }
