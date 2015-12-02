@@ -1,18 +1,23 @@
-.bar path{
-    fill: white;
-    fill-opacity: 1;
+#battery-line-anchor{
+    display: inline;
 }
 
-.danger{
-    fill: red;
-    fill-opacity: 1;
+section{
+    margin-top: 20px;
 }
 
-#battery-widget-pile{
+section *{
+    margin-left: 25px;
+}
+
+#general > div{
     float: left;
 }
 
-#battery-display{
-    margin-right: 10px;
-    float: left;
+#battery-widget-anchor, #battery-widget > *, #distances-wrapper > *{
+    margin-left: 0;
+}
+
+#distances-wrapper > div{
+    float:left;
 }

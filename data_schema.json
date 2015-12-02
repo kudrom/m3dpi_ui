@@ -29,6 +29,16 @@
         "item_turn_radius_type": "number",
         "item_turn_radius_range": [0, 3]
     },
+    "acceleration": {
+        "type": "dict",
+        "keys": ["x", "y", "z"],
+        "x_type": "number",
+        "x_range": [0, 40],
+        "y_type": "number",
+        "y_range": [0, 30],
+        "z_type": "number",
+        "z_range": [0, 30]
+    },
     "rotation": {
         "type": "list",
         "length": 3,
