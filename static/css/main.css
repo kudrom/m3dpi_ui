@@ -8,6 +8,11 @@
     fill-opacity: 1;
 }
 
-#battery_display{
+#battery-widget-pile{
+    float: left;
+}
+
+#battery-display{
     margin-right: 10px;
+    float: left;
 }

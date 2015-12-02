@@ -25,7 +25,7 @@ Battery = function(layout){
     // sub-widgets must be children of this div.
     $(layout.anchor).append('<div id="' + layout.name + '"></div>');
     // The battery_display is going to be the anchor of the display.
-    $('#' + layout.name).append('<span id="battery_display"></span>');
+    $('#' + layout.name).append('<span id="battery-display"></span>');
     // Now change the anchor and the name of the battery drawing to fit the new
     // structure
     layout.anchor = '#' + layout.name;
@@ -51,10 +51,10 @@ Battery = function(layout){
     // This second layout is cooked to the display, this is normal stuff when
     // using DigitalDisplay
     var event_name = layout.event_names[0];
-    layout.name = 'battery_display_widget'
+    layout.name = 'battery-display-widget'
     layout.accessors = [{'type': 'index', 'start': 0, 'end': 3, 'event': event_name}]
     // See above to understand why the anchor is changed
-    layout.anchor = '#battery_display';
+    layout.anchor = '#battery-display';
     // The usual size of a display with three digits is of 130
     layout.scale = layout.size.width / 130;
     layout.digits = [3];
