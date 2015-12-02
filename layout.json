@@ -44,7 +44,7 @@
         "parent": "global",
         "type": "battery",
         "size":{
-            "width": 320
+            "height": 50
         },
         "event_names": ["battery"],
         "anchor": "#battery-widget-anchor"
