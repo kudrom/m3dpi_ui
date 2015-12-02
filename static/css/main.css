@@ -2,3 +2,12 @@
     fill: white;
     fill-opacity: 1;
 }
+
+.danger{
+    fill: red;
+    fill-opacity: 1;
+}
+
+#battery_display{
+    margin-right: 10px;
+}

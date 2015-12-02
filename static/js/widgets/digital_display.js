@@ -1,6 +1,32 @@
 DigitalDisplay = function(layout){
     // Requirements for the layout
-    validate_requirements(['scale', 'digits', 'separator'], layout);
+    validate_requirements(['digits', 'separator'], layout);
+
+    // Calculate the sizes and the scales for the given layout.size
+    var digit_size = 52;
+    var separator_size = 20;
+    var num_separators = layout.digits.length - 1;
+    var num_digits = layout.digits.reduce((prev, curr) => prev + curr);
+    var total_width = num_digits * digit_size + num_separators * separator_size;
+    var total_height = 100;
+    var scalex = 1;
+    var scaley = 1;
+
+    // If both width and height are in the layout, the aspect ratio can be
+    // violated with the new scales, otherwise the height or width are fixed
+    // to keep the aspect ratio.
+    if('width' in layout.size && 'height' in layout.size){
+        scalex = layout.size.width / total_width;
+        scaley = layout.size.height / total_height;
+    }else if('width' in layout.size){
+        scalex = layout.size.width / total_width;
+        scaley = scalex;
+        layout.size.height = scalex * total_height;
+    }else if('height' in layout.size){
+        scaley = layout.size.height / total_height;
+        scalex = scaley;
+        layout.size.width = scaley * total_width;
+    }
 
     // Inherit from Widget
     Widget.call(this, layout);
@@ -23,11 +49,10 @@ DigitalDisplay = function(layout){
 <circle r="4" cx="0" cy="28"/>
 <circle r="4" cx="0" cy="68"/>`;
 
-    var digit_size = 50;
     var separators_amount = 0;
     var previous_digits = 0;
     var total_groups = layout.digits.length;
-    var html_text = '<g transform="scale(' + layout.scale + ')">';
+    var html_text = '<g transform="scale(' + scalex + ' ' + scaley + ')">';
     for(var i = 0; i < total_groups; i++){
         var translation_amount = (digit_size*previous_digits) + separators_amount;
 
@@ -46,7 +71,7 @@ DigitalDisplay = function(layout){
 
         // Print separators
         if((i + 1) < total_groups){
-            separators_amount += 20;
+            separators_amount += separator_size;
             if(layout.separator){
                 var tr = (digit_size*previous_digits) + separators_amount - 8;
                 html_text += '<g class="separator" transform=translate(' + tr + ')>';

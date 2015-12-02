@@ -6,10 +6,19 @@ Battery = function(layout){
     // The viewBox is modified to fit the original size of the drawing and
     // avoid some cropping effects.
     layout.viewBox = "0 90 570 400";
+
+    var scale = 1;
     // The size is shared between the drawing of the battery and its display.
-    layout.size.width = layout.size.width * 0.5;
-    // The height in the layout is not used to avoid weird effects
-    layout.size.height = layout.size.width * 0.7;
+    if('width' in layout.size){
+        scale = layout.size.width / 320;
+        layout.size.width *= 0.4;
+        if(!('height' in layout.size)){
+            layout.size.height = layout.size.width * 0.7;
+        }
+    }else if('height' in layout.size){
+        scale = layout.size.height / 90;
+        layout.size.width = layout.size.height * (10 / 7) * 0.4;
+    }
 
     // The div created below with the id of the widget is going to be removed by
     // the controller when some change is received in its layout, so the two
@@ -42,24 +51,25 @@ Battery = function(layout){
     // This second layout is cooked to the display, this is normal stuff when
     // using DigitalDisplay
     var event_name = layout.event_names[0];
+    layout.name = 'battery_display_widget'
     layout.accessors = [{'type': 'index', 'start': 0, 'end': 3, 'event': event_name}]
     // See above to understand why the anchor is changed
     layout.anchor = '#battery_display';
     // The usual size of a display with three digits is of 130
     layout.scale = layout.size.width / 130;
-    // Scale the size of the viewport if necessary
-    layout.size = {'height': 100 * layout.scale, 'width': 170 * layout.scale};
-    layout.margin.top = 5;
     layout.digits = [3];
     layout.separator = false;
     // Delete this property inherited from the layout of the drawing
     delete layout.viewBox;
+    // Use default aspect ratio for the display
+    delete layout.size.width;
+    layout.size.height = 100 * scale;
     this.display = new DigitalDisplay(layout);
 
     this.paint = function(jdata){
         if(jdata !== null){
             var level = this.accessor(jdata);
-            var thresholds = [15, 50, 75, 95];
+            var thresholds = [15, 50, 75, 90];
 
             // Calculate the new data for the drawing
             var data = [];
@@ -80,7 +90,13 @@ Battery = function(layout){
                     });
 
             // Light up the drawing
-            this.svg.selectAll('.bottle').classed('lit', true);
+            if(level > thresholds[0]){
+                this.svg.selectAll('.bottle').classed('lit', true);
+                this.svg.selectAll('.bottle').classed('danger', false);
+            }else{
+                this.svg.selectAll('.bottle').classed('lit', false);
+                this.svg.selectAll('.bottle').classed('danger', true);
+            }
 
             // Calculate the data for the display and draw it
             var data_display = [];
