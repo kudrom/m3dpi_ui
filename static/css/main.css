@@ -21,8 +21,3 @@ section *{
 #distances-wrapper > div{
     float:left;
 }
-
-.led-circle{
-    fill: url(#gradient-led);
-    fill-opacity: 1;
-}
