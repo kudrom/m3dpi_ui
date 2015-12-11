@@ -21,7 +21,7 @@ settings["mongo_host"] = "localhost"
 settings["mongo_db"] = "robots"
 
 # Sets what listener the backend is using
-settings["listener"] = "mock"
+settings["listener"] = "serial"
 
 # Settings for the mock listener
 settings["mock_timeout"] = 1

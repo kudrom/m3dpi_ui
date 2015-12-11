@@ -4,13 +4,17 @@
 # ]
 from lupulo.http import LupuloResource
 from lupulo.tests.backend.benchmarking import BenchmarkingResource
+from lupulo.listeners_manager import listeners_manager
 
-class HelloResource(LupuloResource):
+class Move(LupuloResource):
     def render_GET(self, request):
-        return "Hello world"
-
+        serial = listeners_manager.get_actual_listener().get_serial_port()
+        for key, value in request.args.items():
+            if key in ['forward', 'backward', 'left', 'right', 'stop']:
+                serial.write(key[0])
+                return "Moved " + key
 
 urlpatterns = [
-    ('hello', HelloResource),
+    ('move', Move),
     ('benchmarking', BenchmarkingResource)
 ]

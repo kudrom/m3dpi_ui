@@ -4,15 +4,8 @@
         "size": {
             "height": 60
         },
-        "event_names": ["date"],
+        "event_names": ["time"],
         "accessors": [{"type": "primitive"}]
-    },
-
-    "battery-widget": {
-        "parent": "global-general",
-        "type": "battery",
-        "event_names": ["battery"],
-        "anchor": "#battery-widget-anchor"
     },
 
     "device-time": {
@@ -25,7 +18,8 @@
     "date": {
         "parent": "global-general",
         "type": "digital_date",
-        "anchor": "#date-anchor"
+        "anchor": "#date-anchor",
+        "format": "DD/MM/YYYY"
     },
 
     "real-time": {
@@ -34,6 +28,7 @@
         "device_time": false,
         "anchor": "#real-time-anchor"
     },
+
 
     "global-lines": {
         "abstract": true,
@@ -45,61 +40,63 @@
         "seconds": 100
     },
 
-    "battery-line": {
-        "parent": "global-lines",
-        "event_names": ["battery"],
-        "anchor": "#battery-line-anchor",
-        "name_lines": ["Battery"],
-        "y_name": "Battery",
-        "accessors": [{
-            "type": "primitive"
-        }],
-
-        "range": [0, 100]
-    },
     "distances": {
         "abstract": true,
         "parent": "global-lines",
-        "event_names": ["distances"],
-        "range": [0, 4]
+        "event_names": ["distance"],
+        "range": [0, 255]
     },
     "distances-center": {
         "parent": "distances",
-        "name_lines": ["Front-left", "Front-center", "Front-right"],
+        "name_lines": ["Front", "Front-right", "Front-left"],
         "y_name": "Distances front",
-        "anchor": "#distances-center-anchor",
-        "accessors": [{
-            "type": "index",
-            "start": 0,
-            "end": 3
-        }]
+        "anchor": "#distances-front-anchor",
+        "accessors": [
+            {
+                "type": "index",
+                "start": 0,
+                "end": 2
+            },
+            {
+                "type": "index",
+                "start": 7,
+                "end": 8
+            }
+        ]
     },
     "distances-middle": {
         "parent": "distances",
-        "name_lines": ["Middle-left", "Middle-right"],
-        "y_name": "Distances middle",
-        "anchor": "#distances-middle-anchor",
-        "accessors": [{
-            "type": "index",
-            "start": 3,
-            "end": 5
-        }]
+        "name_lines": ["Right", "Left"],
+        "y_name": "Distances center",
+        "anchor": "#distances-center-anchor",
+        "accessors": [
+            {
+                "type": "index",
+                "start": 2,
+                "end": 3
+            },
+            {
+                "type": "index",
+                "start": 6,
+                "end": 7
+            }
+        ]
     },
     "distances-back": {
         "parent": "distances",
-        "name_lines": ["Back-left", "Back-center", "Back-right"],
+        "name_lines": ["Back-right", "Back", "Back-left"],
         "y_name": "Distances back",
         "anchor": "#distances-back-anchor",
         "accessors": [{
             "type": "index",
-            "start": 5,
-            "end": 8
+            "start": 3,
+            "end": 6
         }]
     },
 
     "acceleration": {
         "parent": "global-lines",
-        "anchor": "#debug-anchor",
+        "anchor": "#acceleration-anchor",
         "event_names": ["acceleration"],
         "name_lines": ["x", "y", "z"],
         "y_name": "Acceleration",
@@ -111,39 +108,31 @@
                      ]
     },
 
-    "axis-x": {
+    "direction": {
         "parent": "global-lines",
-        "anchor": "#axis-x-anchor",
-        "event_names": ["acceleration", "rotation"],
-        "name_lines": ["x-acceleration", "x-rotation"],
-        "y_name": "Acceleration and rotation for x axis",
-        "range": [0, 360],
+        "anchor": "#direction-anchor",
+        "event_names": ["direction"],
+        "name_lines": ["x", "y", "z"],
+        "y_name": "Direction",
+        "range": [0, 40],
         "accessors": [
-                        {"type": "dict", "key": "x", "event": "acceleration"},
-                        {"type": "index", "start": 0, "end": 1, "event": "rotation"}
+                      {"type": "dict", "key": "x"},
+                      {"type": "dict", "key": "y"},
+                      {"type": "dict", "key": "z"}
                      ]
     },
 
-    "motor": {
-        "abstract": true,
+    "rotation": {
         "parent": "global-lines",
-        "event_names": ["motor"]
-    },
-    "speed": {
-        "parent": "motor",
-        "name_lines": ["speed-left", "speed-right"],
-        "y_name": "Speed",
-        "anchor": "#speed-anchor",
-        "accessors": [{
-            "type": "index",
-            "start": 0,
-            "end": 2,
-            "after": [{
-                "type": "dict",
-                "key": "speed"
-            }]
-        }],
-
-        "range": [0, 5]
+        "anchor": "#rotation-anchor",
+        "event_names": ["rotation"],
+        "name_lines": ["x", "y", "z"],
+        "y_name": "Rotation",
+        "range": [0, 40],
+        "accessors": [
+                      {"type": "dict", "key": "x"},
+                      {"type": "dict", "key": "y"},
+                      {"type": "dict", "key": "z"}
+                     ]
     }
 }
