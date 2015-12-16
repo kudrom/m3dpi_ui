@@ -21,3 +21,50 @@ section *{
 #distances-wrapper > div{
     float:left;
 }
+
+/* Styles for the radio control */
+#radio-control > div{
+    position: relative;
+}
+
+#keys{
+    height: 120px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.key{
+    height: 40px;
+    display: inline;
+    background: rgba(0,0,0,0.1);
+    padding: 10px 13px;
+    border-radius: 5px;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+}
+
+.key:hover{
+    background: rgba(0,0,0,0.3)
+}
+
+.pressed, .pressed:hover{
+    background: #29F;
+    color: white;
+}
+
+#key-w{
+    left: 80px;
+    top: 0px;
+}
+
+#key-a, #key-s, #key-d{
+    left: 0px;
+    top: 40px;
+}
+
+#key-space{
+    padding-right: 105px;
+    left: -120px;
+    top: 90px;
+}
