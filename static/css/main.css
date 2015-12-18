@@ -29,8 +29,8 @@ section *{
 
 #keys{
     height: 120px;
-    margin-top: 20px;
-    margin-left: 10px;
+    margin-top: 40px;
+    margin-left: 260px;
 }
 
 .key{
@@ -74,4 +74,63 @@ section *{
     padding-right: 170px;
     left: -187px;
     top: 90px;
+}
+
+#leds{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+    background: rgba(0,0,0,0.1);
+    float: left;
+}
+
+#leds span{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+
+#leds *{
+    margin: 0;
+}
+
+#led1{
+    top: 0;
+    left: 80px;
+}
+
+#led2{
+    top: 25px;
+    right: 20px;
+}
+
+#led3{
+    top: 85px;
+    right: 0;
+}
+
+#led4{
+    bottom: 25px;
+    right: 25px;
+}
+
+#led5{
+    bottom: 0;
+    left: 80px;
+}
+
+#led6{
+    bottom: 25px;
+    left: 25px;
+}
+
+#led7{
+    top: 85px;
+    left: 0;
+}
+
+#led8{
+    top: 25px;
+    left: 20px;
 }
