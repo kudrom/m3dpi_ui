@@ -13,30 +13,30 @@
         "type": "dict",
         "keys": ["x", "y", "z"],
         "x_type": "number",
-        "x_range": [0, 40],
+        "x_range": [-150, 300],
         "y_type": "number",
-        "y_range": [0, 30],
+        "y_range": [-150, 300],
         "z_type": "number",
-        "z_range": [0, 30]
+        "z_range": [-150, 300]
     },
     "rotation": {
         "type": "dict",
         "keys": ["x", "y", "z"],
         "x_type": "number",
-        "x_range": [0, 40],
+        "x_range": [-1000, 300],
         "y_type": "number",
-        "y_range": [0, 30],
+        "y_range": [-1000, 300],
         "z_type": "number",
-        "z_range": [0, 30]
+        "z_range": [-1000, 300]
     },
     "direction": {
         "type": "dict",
         "keys": ["x", "y", "z"],
         "x_type": "number",
-        "x_range": [0, 40],
+        "x_range": [-1000, 0],
         "y_type": "number",
-        "y_range": [0, 30],
+        "y_range": [-1000, 0],
         "z_type": "number",
-        "z_range": [0, 30]
+        "z_range": [-1000, 0]
     }
 }

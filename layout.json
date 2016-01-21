@@ -58,20 +58,6 @@
         "accessors": [{"type": "primitive"}]
     },
 
-    "device-time": {
-        "parent": "global-general",
-        "type": "digital_clock",
-        "device_time": true,
-        "anchor": "#device-time-anchor"
-    },
-
-    "date": {
-        "parent": "global-general",
-        "type": "digital_date",
-        "anchor": "#date-anchor",
-        "format": "DD/MM/YYYY"
-    },
-
     "real-time": {
         "parent": "global-general",
         "type": "digital_clock",
@@ -142,47 +128,5 @@
             "start": 3,
             "end": 6
         }]
-    },
-
-    "acceleration": {
-        "parent": "global-lines",
-        "anchor": "#acceleration-anchor",
-        "event_names": ["acceleration"],
-        "name_lines": ["x", "y", "z"],
-        "y_name": "Acceleration",
-        "range": [0, 20000],
-        "accessors": [
-                      {"type": "dict", "key": "x"},
-                      {"type": "dict", "key": "y"},
-                      {"type": "dict", "key": "z"}
-                     ]
-    },
-
-    "direction": {
-        "parent": "global-lines",
-        "anchor": "#direction-anchor",
-        "event_names": ["direction"],
-        "name_lines": ["x", "y", "z"],
-        "y_name": "Direction",
-        "range": [0, 40],
-        "accessors": [
-                      {"type": "dict", "key": "x"},
-                      {"type": "dict", "key": "y"},
-                      {"type": "dict", "key": "z"}
-                     ]
-    },
-
-    "rotation": {
-        "parent": "global-lines",
-        "anchor": "#rotation-anchor",
-        "event_names": ["rotation"],
-        "name_lines": ["x", "y", "z"],
-        "y_name": "Rotation",
-        "range": [0, 40],
-        "accessors": [
-                      {"type": "dict", "key": "x"},
-                      {"type": "dict", "key": "y"},
-                      {"type": "dict", "key": "z"}
-                     ]
     }
 }
