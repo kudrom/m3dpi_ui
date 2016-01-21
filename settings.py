@@ -21,7 +21,7 @@ settings["mongo_host"] = "localhost"
 settings["mongo_db"] = "robots"
 
 # Sets what listener the backend is using
-settings["listener"] = "serial"
+settings["listener"] = "mock"
 
 # Settings for the mock listener
 settings["mock_timeout"] = 1
@@ -31,8 +31,8 @@ settings["mock_ids"] = 2
 settings["serial_device"] = "/dev/ttyAMA0"
 settings["baudrate"] = 57600
 # Settings for the serial listener
-settings["serial_device"] = "/dev/ttyACM0"
-settings["baudrate"] = 115200
+# settings["serial_device"] = "/dev/ttyACM0"
+# settings["baudrate"] = 115200
 
 # Allow executions of settings when startup.tac file is not executed, for
 # example in sse_client.py

@@ -95,42 +95,42 @@ section *{
     margin: 0;
 }
 
-#led1{
+#led1-anchor{
     top: 0;
     left: 80px;
 }
 
-#led2{
+#led2-anchor{
     top: 25px;
     right: 20px;
 }
 
-#led3{
+#led3-anchor{
     top: 85px;
     right: 0;
 }
 
-#led4{
+#led4-anchor{
     bottom: 25px;
     right: 25px;
 }
 
-#led5{
+#led5-anchor{
     bottom: 0;
     left: 80px;
 }
 
-#led6{
+#led6-anchor{
     bottom: 25px;
     left: 25px;
 }
 
-#led7{
+#led7-anchor{
     top: 85px;
     left: 0;
 }
 
-#led8{
+#led8-anchor{
     top: 25px;
     left: 20px;
 }
